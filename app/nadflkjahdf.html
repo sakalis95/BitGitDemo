@@ -1,0 +1,24 @@
+const validateRPassword = () => {
+    var isPswsValid = false;
+    var paswElement = document.getElementById("psw");
+    var rpaswElement = document.getElementById("rpsw");
+    if (paswElement.value !== rpaswElement.value) {
+        document.getElementById("rpaswWarn").style.display = ""; // parodomas warningas
+    } else {
+        document.getElementById("rpaswWarn").style.display = "none";
+        isPswsValid = true;
+    }
+    return isPswsValid;
+};
+
+const send = () => {
+    if (!validateName() || !validatePassword() || !validateRPassword()) {
+        event.preventDefault(); // nieko nedaro
+        document.getElementById("check").style.display = ""; // parodomas warningas
+    } else {
+        var userForm = document.getElementsByTagName("form")[0];
+        var formParent = userForm.parentNode;
+        formParent.removeChild(userForm);
+        formParent.innerHTML = "<p>Registracija sėkminga!</p>";
+    }
+};
