@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        .container {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .btns {
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card" style="width: 25rem">
+            <div class="card-header">Registracija</div>
+            <div class="card-body">
+                <form id="forma">
+                    <div class="mb-3">
+                        <label for="user_name" class="form-label">Vartotojo identifikacninis kodas (R-###):</label>
+                        <input type="text" oninput="validateName()" required class="form-control" id="user_name"
+                            rows="3"></input>
+                        <p id="nameWarn" style="display: none; color: red; margin: 0; font-size: 10px">Vartotojo kodas
+                            netinkamos struktūros (R-###):</p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="psw" class="form-label">Slaptažodis (naudotini simboliai: !, @, `)</label>
+                        <input type="password" oninput="validatePassword()" required class="form-control" id="psw">
+                        <p id="paswWarn" style="display: none; color: red; margin: 0; font-size: 10px">Slaptažodis turi
+                            būti sudarytas iš ne mažiau 6 simbolių ir turi turėti bent vieną specialų simbolį (!, @, `):
+                        </p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rpsw" class="form-label">Slaptažodžio pakartojimas:</label>
+                        <input type="password" oninput="validateRPassword()" required class="form-control" id="rpsw">
+                        <p id="rpaswWarn" style="display: none; color: red; margin: 0; font-size: 10px">Slaptažodžiai
+                            nesutampa!</p>
+                    </div>
+                    <button type="submit" id="confirmButton" class="btn btn-warning" onclick="send()">Sukurti
+                        vartotoją</button>
+                </form>
+                <p id="check" style="display: none; color: red; margin: 0; font-size: 14px; padding-top: 10px;">Įveskite
+                    teisingus duomenis!</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        const validateName = () => {
+            var isUserNameValid = false;
+            var nameElement = document.getElementById("user_name");
+            if (!nameElement.value.match(/R-\d{3}$/g)) {
+                document.getElementById("nameWarn").style.display = ""; // parodomas warningas
+            } else {
+                document.getElementById("nameWarn").style.display = "none";
+                isUserNameValid = true;
+            }
+            return isUserNameValid;
+        };
+        const validatePassword = () => {
+            var isUserPswValid = false;
+            var paswElement = document.getElementById("psw");
+            if (!paswElement.value.match(/^([a-zA-Z0-9])(?=.*[!@`])/g) || paswElement.value.length < 6) {
+                document.getElementById("paswWarn").style.display = ""; // parodomas warningas
+            } else {
+                document.getElementById("paswWarn").style.display = "none";
+                isUserPswValid = true;
+            }
+            return isUserPswValid;
+        };
+        const validateRPassword = () => {
+            var isPswsValid = false;
+            var paswElement = document.getElementById("psw");
+            var rpaswElement = document.getElementById("rpsw");
+            if (paswElement.value !== rpaswElement.value) {
+                document.getElementById("rpaswWarn").style.display = ""; // parodomas warningas
+            } else {
+                document.getElementById("rpaswWarn").style.display = "none";
+                isPswsValid = true;
+            }
+            return isPswsValid;
+        };
+
+        const send = () => {
+            if (!validateName() || !validatePassword() || !validateRPassword()) {
+                event.preventDefault(); // nieko nedaro
+                document.getElementById("check").style.display = ""; // parodomas warningas
+            } else {
+                var userForm = document.getElementsByTagName("form")[0];
+                var formParent = userForm.parentNode;
+                formParent.removeChild(userForm);
+                formParent.innerHTML = "<p>Registracija sėkminga!</p>";
+            }
+        };
+    </script>
+</html>
