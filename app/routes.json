@@ -1,0 +1,5 @@
+{
+    "/*": "/$1",
+    "/:resource/:subresource": "/:resource?_embed=:subresource",
+    "/:resource/:id/:subresource": "/:subresource?productId=:id"
+}

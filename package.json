@@ -1,0 +1,26 @@
+{
+  "name": "webpackdemo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "dev": "webpack serve"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.42.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "cypress": "^7.6.0",
+    "cypress-plugin-snapshots": "^1.4.4",
+    "lodash": "^4.17.21",
+    "plugin": "^0.3.3",
+    "snapshots": "0.0.1"
+  }
+}
