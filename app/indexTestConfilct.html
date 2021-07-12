@@ -113,6 +113,19 @@
                 formParent.removeChild(userForm);
                 formParent.innerHTML = "<p>Registracija sėkminga!</p>";
             }
-        };
+        
+        const validateRPassword = () => {
+            var isPswsValid = false;
+            var paswElement = document.getElementById("psw");
+            var rpaswElement = document.getElementById("rpsw");
+            if (paswElement.value !== rpaswElement.value) {
+                document.getElementById("rpaswWarn").style.display = ""; // parodomas warningas
+            } else {
+                document.getElementById("rpaswWarn").style.display = "none";
+                isPswsValid = true;
+            }
+            return isPswsValid;
+        }};
     </script>
+</body>
 </html>
